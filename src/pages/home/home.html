@@ -1,18 +1,35 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Play sound</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+<ion-content>
+  <ion-grid>
+    <ion-row *ngFor="let item of items">
+      <ion-col col-1>
+        <ion-icon class="music-icon" name="musical-notes" item-left></ion-icon>
+      </ion-col>
+      <ion-col col-3>
+        {{ item.title }}
+      </ion-col>
+      <ion-col col-2>
+        <button (touchstart)="itemTapped($event, item)" (touchend)="itemKeyUp($event,item)">
+          <ion-icon name="play"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-3>
+        <ion-input type="text" placeholder="Fade In Time"></ion-input>
+      </ion-col>
+      <ion-col col-3>
+        <ion-input type="text" placeholder="Fade Out Time"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div *ngIf="selectedItem" padding>
+    You navigated here from <b>{{selectedItem.title}}</b>
+  </div>
 </ion-content>
