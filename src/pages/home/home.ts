@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Media, MediaObject } from '@ionic-native/media';
 
 
@@ -9,47 +9,73 @@ import { Media, MediaObject } from '@ionic-native/media';
 })
 export class HomePage {
   selectedItem: any;
+  path : string;
   icons: string[];
-  items: Array<{ title: string, note: string, icon: string }>;
+  items: Array<{ title: string, fileName: string}>;
   music: MediaObject;
+  playing : boolean = false;
+  musicStatus: number;
 
-  constructor(public navCtrl: NavController, public media: Media, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public platform: Platform, public media: Media, public navParams: NavParams) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');
-
-    // Let's populate this page with some filler content for funzies
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-      'american-football', 'boat', 'bluetooth', 'build'];
-
-    this.items = [];
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+    this.items = [
+      { title: 'Sad', fileName: 'SadMusic.mp3'},
+      { title: 'Mystery 1', fileName: 'Mystery1.mp3'},
+      { title: 'Mystery 2', fileName: 'Mystery2.mp3'},
+      { title: 'Happy', fileName: 'Happy1.mp3'}
+    ]
   }
 
-  ionViewDidLoad(){
-    this.music = this.media.create('https://s3.amazonaws.com/rupam-bucket-1/BashBagan.mp3');
-    this.music.onStatusUpdate.subscribe(status => console.log(status)); // fires when file status changes
+  ionViewDidLoad() {
+    this.path = 'assets/sounds/';
 
-    this.music.onSuccess.subscribe(() => console.log('Action is successful'));
-
-    this.music.onError.subscribe(error => console.log('Error!', error));
+    //android path
+    if (this.platform.is('android')) {
+      this.path = '/android_asset/www/assets/sounds/';
+    }
   }
 
   itemTapped(event, item) {
     // That's right, we're pushing to ourselves!
-    item.title = 'tapped';
-    
-    this.music.play();
+    this.loop(item);
   }
 
   itemKeyUp(event, item) {
-    item.title = 'untapped';
-    this.music.stop();
+    this.stop();
+  }
+
+  loop(item, firstRun: boolean = true) {
+    if(firstRun){
+      this.playing = true;
+    }
+    this.music = this.media.create(`${this.path}${item.fileName}`);
+    this.music.onStatusUpdate.subscribe(status => {
+      console.log('status: ' + status);
+      this.musicStatus = status;
+      setTimeout(()=> {
+        if(this.playing && status === 4) {
+          this.loop(item, false);
+        }
+      }, 400);
+    }); 
+    this.music.onSuccess.subscribe(() => console.log('Action is successful'));
+    this.music.onError.subscribe(error => console.log('Error!', error));
+    if(firstRun){
+      this.music.seekTo(0); 
+    } else {
+      this.music.seekTo(0); // Todo this should be set to the loopStaartTime when playing in loop;
+    }
+    // this.music.setVolume(); // Todo set individual volume if present.
+    this.music.play();
+  }
+
+  stop() {
+    this.playing = false;
+    if(this.musicStatus === 2) {
+      this.music.stop();
+    }
+    this.music.release();
   }
 
 }

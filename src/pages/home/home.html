@@ -17,8 +17,8 @@
         {{ item.title }}
       </ion-col>
       <ion-col col-2>
-        <button (touchstart)="itemTapped($event, item)" (touchend)="itemKeyUp($event,item)">
-          <ion-icon name="play"></ion-icon>
+        <button ion-button (touchstart)="itemTapped($event, item)" (touchend)="itemKeyUp($event,item)" round outline>
+          <ion-icon name="play" color="secondary"></ion-icon>
         </button>
       </ion-col>
       <ion-col col-3>
@@ -29,7 +29,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
 </ion-content>
