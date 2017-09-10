@@ -8,6 +8,8 @@ import { HomePage } from '../pages/home/home';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Media } from '@ionic-native/media';
+import { File } from '@ionic-native/file';
+import { SoundsProvider } from '../providers/sounds/sounds';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { Media } from '@ionic-native/media';
     StatusBar,
     SplashScreen,
     Media,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    File,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    SoundsProvider
   ]
 })
 export class AppModule {}
