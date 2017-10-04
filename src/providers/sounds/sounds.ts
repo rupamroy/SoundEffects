@@ -61,17 +61,13 @@ export class SoundsProvider {
 
   seed() {
     this.sounds = [
-      { title: 'Sad', fileName: 'SadMusic.mp3', fadeOutTime: 5000 },
-      { title: 'Mystery 1', fileName: 'Mystery1.mp3' },
-      { title: 'Mystery 2', fileName: 'Mystery2.mp3' },
+      { title: 'Uklele', fileName: 'Uklele.mp3', loopDisabled: true},
+      { title: 'Phone', fileName: 'Phone.mp3', loopDisabled: true },
       { title: 'Happy', fileName: 'Happy1.mp3', loopDisabled: true },
       { title: 'Bash Bagan', fileName: 'BashBagan.mp3' },
       { title: 'Booter Raja', fileName: 'BhooterRaja.mp3' },
-      { title: 'Bash Bagan', fileName: 'BashBagan.mp3' },
       { title: 'Plane Landing', fileName: 'PlaneLanding.mp3', loopDisabled: true },
-      { title: 'Airport chaos', fileName: 'Airport1.mp3' },
       { title: 'Tense', fileName: 'Suspense.mp3' },
-      { title: 'Ambience', fileName: 'Ambience.mp3', fadeOutTime: 5000 }
     ]
   }
 

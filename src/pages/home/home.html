@@ -8,25 +8,81 @@
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-row>
+        <ion-col class="col-6">
+          <ion-row>
+            <ion-col class="col-6">
+              <button ion-button (click)="reset">
+                <ion-icon name="refresh"></ion-icon>
+              </button></ion-col>
+            <ion-col class="col-6"></ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
   <ion-grid>
-    <ion-row *ngFor="let item of items">
-      <ion-col col-1>
-        <ion-icon class="music-icon" name="musical-notes" item-left></ion-icon>
+    <ion-row>
+      <ion-col col-6>
+        <ion-card *ngFor="let item of items; let i = index">
+          <ion-card-content *ngIf="i%2 === 0">
+            <ion-row>
+              <ion-col col-2>
+                <ion-icon class="music-icon" name="musical-notes" item-left></ion-icon>
+              </ion-col>
+              <ion-col col-7>
+                <h2>
+                  {{ item.title }}
+                </h2>
+                <p *ngIf="item.fadeOutTime">
+                  <ion-label>Fade-out</ion-label>{{item.fadeOutTime}}
+                </p>
+                <ion-item>
+                  <ion-label>Loop</ion-label>
+                  <ion-checkbox color="blue" [checked]="!item.loopDisabled"></ion-checkbox>
+                </ion-item>
+              </ion-col>
+              <ion-col col-3>
+                <button ion-button (touchstart)="itemTapped($event, item)" (touchend)="itemKeyUp($event,item)" round outline>
+                        <ion-icon name="play" color="secondary"></ion-icon>
+                      </button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
-      <ion-col col-3>
-        {{ item.title }}
-      </ion-col>
-      <ion-col col-2>
-        <button ion-button (touchstart)="itemTapped($event, item)" (touchend)="itemKeyUp($event,item)" round outline>
-          <ion-icon name="play" color="secondary"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col col-3>
-        <ion-input type="text" placeholder="Fade In Time"></ion-input>
-      </ion-col>
-      <ion-col col-3>
-        <ion-input type="text" placeholder="Fade Out Time"></ion-input>
+      <ion-col col-6>
+        <ion-card *ngFor="let item of items; let i = index">
+          <ion-card-content *ngIf="i%2 !== 0">
+            <ion-row>
+              <ion-col col-2>
+                <ion-icon class="music-icon" name="musical-notes" item-left></ion-icon>
+              </ion-col>
+              <ion-col col-7>
+                <h2>
+                  {{ item.title }}
+                </h2>
+                <p *ngIf="item.fadeOutTime">
+                  <ion-label>Fade-out</ion-label>{{item.fadeOutTime}}
+                </p>
+                <ion-item>
+                  <ion-label>Loop</ion-label>
+                  <ion-checkbox color="blue" [checked]="!item.loopDisabled"></ion-checkbox>
+                </ion-item>
+              </ion-col>
+              <ion-col col-3>
+                <button ion-button (touchstart)="itemTapped($event, item)" (touchend)="itemKeyUp($event,item)" round outline>
+                            <ion-icon name="play" color="secondary"></ion-icon>
+                          </button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+
 </ion-content>
