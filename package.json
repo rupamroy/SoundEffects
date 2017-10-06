@@ -28,6 +28,7 @@
         "@ionic/storage": "2.0.1",
         "bootstrap": "^3.3.7",
         "cordova-android": "^6.2.3",
+        "cordova-ios": "^4.4.0",
         "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "^1.1.4",
@@ -57,12 +58,15 @@
             "cordova-plugin-statusbar": {},
             "cordova-plugin-whitelist": {},
             "ionic-plugin-keyboard": {},
-            "cordova-plugin-media": {},
+            "cordova-plugin-media": {
+                "MICROPHONE_USAGE_DESCRIPTION": " "
+            },
             "cordova-plugin-file": {},
             "cordova-plugin-insomnia": {}
         },
         "platforms": [
-            "android"
+            "android",
+            "ios"
         ]
     }
 }
