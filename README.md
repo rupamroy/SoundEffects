@@ -24,3 +24,17 @@ $ ionic cordova run ios
 
 Substitute ios for android if not on a Mac.
 
+To emulate on an ios emulator
+
+```bash
+npm i -s cordova-ios
+cd platform/ios/cordova && npm i ios-sim
+cd ../../..
+ionic cordova emulate ios --target="iPad-Pro"
+```
+
+To deploy to IOS
+http://blog.ionic.io/deploying-to-a-device-without-an-apple-developer-account/
+
+
+

@@ -68,6 +68,7 @@ export class SoundsProvider {
       { title: 'Booter Raja', fileName: 'BhooterRaja.mp3' },
       { title: 'Plane Landing', fileName: 'PlaneLanding.mp3', loopDisabled: true },
       { title: 'Tense', fileName: 'Suspense.mp3' },
+      { title: 'Alarm', fileName: 'Alarm.m4a' }
     ]
   }
 

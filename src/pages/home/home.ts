@@ -126,6 +126,7 @@ export class HomePage {
 
   reset() {
     try {
+      console.log(this.music);
       this.music.stop();
       this.music.release();
     } catch (err) {
@@ -134,6 +135,7 @@ export class HomePage {
   }
 
   handleError(error: Error) {
+    console.log("On Error Handler");
     let toast = this.toastCtrl.create({
       message: error.message,
       duration: 5000
